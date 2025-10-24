@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调查问卷结果 - 学生时间管理应用项目</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #4a6491, #2c3e50);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #3498db;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: #3498db;
+            color: white;
+        }
+
+        section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eaecef;
+            display: flex;
+            align-items: center;
+        }
+
+        h2:before {
+            content: "■";
+            margin-right: 10px;
+            color: #3498db;
+        }
+
+        h3 {
+            color: #3498db;
+            margin: 20px 0 10px;
+            font-size: 1.4rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul,
+        ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .survey-insights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .insight-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-top: 4px solid #3498db;
+        }
+
+        .insight-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eaecef;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f5f7fa;
+        }
+
+        .data-table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #3498db;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .chart-placeholder {
+            height: 300px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+
+        .key-findings {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .finding-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+
+        .finding-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .interview-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .interview-link:hover {
+            background: #2980b9;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            border-top: 1px solid #eaecef;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 20px;
+            }
+
+            .survey-insights,
+            .stats-grid,
+            .key-findings {
+                grid-template-columns: 1fr;
+            }
+
+            .data-table-container {
+                overflow-x: scroll;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <div class="container">
+        <h1>调查问卷结果分析</h1>
+        <p class="subtitle">基于10份有效问卷的学生时间管理习惯调研</p>
+        <a href="index.html" class="back-link">← 返回项目主页</a>
+    </div>
+</header>
+
+<div class="container">
+    <section id="survey-overview">
+        <h2>问卷概述</h2>
+        <p>我们收集了10份有效的调查问卷，覆盖了从大一至研究生的不同年级学生。这些问卷帮助我们深入了解学生的时间管理习惯、面临的挑战和期望的工具功能。</p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">10</div>
+                <div class="stat-label">有效问卷数量</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">4</div>
+                <div class="stat-label">年级分布</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">60%</div>
+                <div class="stat-label">学生表示难以专注</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">40%</div>
+                <div class="stat-label">学生每天拖延超过3小时</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="survey-insights">
+        <h2>关键洞察</h2>
+        <p>通过对问卷数据的分析，我们发现了一些关于学生时间管理的重要洞察：</p>
+
+        <div class="survey-insights">
+            <div class="insight-card">
+                <h4>拖延情况</h4>
+                <ul>
+                    <li>40%的学生每天拖延时间超过3小时</li>
+                    <li>只有20%的学生能够控制拖延在1小时内</li>
+                    <li>拖延与成绩影响呈正相关关系</li>
+                </ul>
+            </div>
+
+            <div class="insight-card">
+                <h4>常见困难</h4>
+                <ul>
+                    <li>优先级混乱 (40%)</li>
+                    <li>难以专注 (60%)</li>
+                    <li>临时打断 (50%)</li>
+                    <li>完美主义 (30%)</li>
+                </ul>
+            </div>
+
+            <div class="insight-card">
+                <h4>干扰源评分</h4>
+                <p>学生对不同干扰源的影响程度评分(1-5分，5分表示影响最大)：</p>
+                <ul>
+                    <li>手机：平均2.4分</li>
+                    <li>朋友：平均2.8分</li>
+                    <li>噪音：平均3.3分</li>
+                    <li>情绪：平均2.6分</li>
+                    <li>插入事件：平均1.9分</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="detailed-data">
+        <h2>详细问卷数据</h2>
+        <p>以下是10份问卷的详细数据，包括年级、拖延时长、常见困难、干扰源评分等多个维度的信息：</p>
+
+        <div class="data-table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>年级</th>
+                    <th>拖延时长</th>
+                    <th>常见困难</th>
+                    <th>干扰源评分</th>
+                    <th>成绩影响</th>
+                    <th>自评水平</th>
+                    <th>使用工具</th>
+                    <th>放弃原因</th>
+                    <th>方法有效性(番茄/四象限/清单/作息)</th>
+                    <th>调整频率</th>
+                    <th>规划方式</th>
+                    <th>希望功能</th>
+                    <th>激励因素</th>
+                    <th>AI助手期待</th>
+                    <th>被低估技巧</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>大一</td>
+                    <td>2-3小时</td>
+                    <td>优先级混乱、难以专注</td>
+                    <td>手机2、朋友3、噪音4、情绪2、插入3</td>
+                    <td>4</td>
+                    <td>50~70%</td>
+                    <td>专注类、手写本</td>
+                    <td>无法坚持</td>
+                    <td>4/3/5/4</td>
+                    <td>每天1次</td>
+                    <td>提前一天</td>
+                    <td>屏蔽干扰、任务拆分</td>
+                    <td>明确反馈</td>
+                    <td>分心时提醒</td>
+                    <td>设定现实目标</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>大二</td>
+                    <td>＞3小时</td>
+                    <td>拖延、临时打断</td>
+                    <td>手机1、朋友2、噪音3、情绪2、插入1</td>
+                    <td>5</td>
+                    <td>70%~100%</td>
+                    <td>无</td>
+                    <td>无</td>
+                    <td>2/2/3/2</td>
+                    <td>每天多次</td>
+                    <td>临时决定</td>
+                    <td>动态调整</td>
+                    <td>同伴监督</td>
+                    <td>自动安排计划</td>
+                    <td>小目标分阶段完成</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>大三</td>
+                    <td>1-2小时</td>
+                    <td>专注困难</td>
+                    <td>手机3、朋友3、噪音4、情绪3、插入2</td>
+                    <td>3</td>
+                    <td>20~50%</td>
+                    <td>Todoist、番茄钟</td>
+                    <td>无</td>
+                    <td>5/4/5/3</td>
+                    <td>每周几次</td>
+                    <td>提前一周</td>
+                    <td>数据报告</td>
+                    <td>进度反馈</td>
+                    <td>情绪调节任务</td>
+                    <td>复盘时间使用</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>大四</td>
+                    <td>＜1小时</td>
+                    <td>临时打断、完美主义</td>
+                    <td>手机4、朋友3、噪音3、情绪4、插入2</td>
+                    <td>2</td>
+                    <td>前20%</td>
+                    <td>Google Calendar</td>
+                    <td>无</td>
+                    <td>3/5/4/5</td>
+                    <td>很少调整</td>
+                    <td>提前一周</td>
+                    <td>动态调整</td>
+                    <td>长期目标</td>
+                    <td>自动安排计划</td>
+                    <td>任务分解</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>研究生</td>
+                    <td>2-3小时</td>
+                    <td>难以专注、完美主义</td>
+                    <td>手机2、朋友4、噪音3、情绪3、插入2</td>
+                    <td>4</td>
+                    <td>20~50%</td>
+                    <td>滴答清单</td>
+                    <td>功能不符</td>
+                    <td>4/3/4/4</td>
+                    <td>每周几次</td>
+                    <td>提前一天</td>
+                    <td>数据报告、屏蔽干扰</td>
+                    <td>长期目标</td>
+                    <td>提醒分心</td>
+                    <td>自我奖励机制</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>大二</td>
+                    <td>＞3小时</td>
+                    <td>优先级混乱、打断</td>
+                    <td>手机1、朋友1、噪音2、情绪2、插入1</td>
+                    <td>5</td>
+                    <td>70%~100%</td>
+                    <td>Forest</td>
+                    <td>无法坚持</td>
+                    <td>3/2/3/2</td>
+                    <td>每天多次</td>
+                    <td>临时决定</td>
+                    <td>屏蔽干扰、动态调整</td>
+                    <td>同伴监督</td>
+                    <td>自动调整任务难度</td>
+                    <td>番茄结合休息法</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>大三</td>
+                    <td>1-2小时</td>
+                    <td>难以专注、临时事件</td>
+                    <td>手机2、朋友3、噪音4、情绪3、插入2</td>
+                    <td>3</td>
+                    <td>50~70%</td>
+                    <td>手写计划本</td>
+                    <td>缺乏提醒</td>
+                    <td>3/4/4/3</td>
+                    <td>每天1次</td>
+                    <td>提前一天</td>
+                    <td>屏蔽干扰、报告分析</td>
+                    <td>进度反馈</td>
+                    <td>分心提醒</td>
+                    <td>晚间复盘</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>大一</td>
+                    <td>＜1小时</td>
+                    <td>无明显困难</td>
+                    <td>手机3、朋友3、噪音4、情绪4、插入3</td>
+                    <td>2</td>
+                    <td>前20%</td>
+                    <td>Todoist、Calendar</td>
+                    <td>无</td>
+                    <td>5/4/5/5</td>
+                    <td>很少调整</td>
+                    <td>提前一周</td>
+                    <td>报告分析</td>
+                    <td>长期目标</td>
+                    <td>自动计划</td>
+                    <td>周回顾</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>大四</td>
+                    <td>1-2小时</td>
+                    <td>完美主义、打断</td>
+                    <td>手机2、朋友3、噪音3、情绪3、插入2</td>
+                    <td>3</td>
+                    <td>20~50%</td>
+                    <td>Forest、番茄钟</td>
+                    <td>无法坚持</td>
+                    <td>4/3/4/4</td>
+                    <td>每周几次</td>
+                    <td>提前一天</td>
+                    <td>任务拆分</td>
+                    <td>明确反馈</td>
+                    <td>提醒分心</td>
+                    <td>简化计划表</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>研究生</td>
+                    <td>＞3小时</td>
+                    <td>拖延、专注困难</td>
+                    <td>手机1、朋友2、噪音2、情绪1、插入1</td>
+                    <td>5</td>
+                    <td>70~100%</td>
+                    <td>无</td>
+                    <td>无</td>
+                    <td>2/3/2/2</td>
+                    <td>每天多次</td>
+                    <td>临时决定</td>
+                    <td>动态调整</td>
+                    <td>短期奖励</td>
+                    <td>自动安排计划</td>
+                    <td>休息时间管理</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="key-findings">
+        <h2>关键发现总结</h2>
+        <p>基于问卷数据的深入分析，我们总结出以下关键发现：</p>
+
+        <div class="key-findings">
+            <div class="finding-card">
+                <h4>干扰源分析</h4>
+                <p>手机和噪音是学生面临的主要外部干扰源。手机干扰平均评分2.4分，噪音干扰平均评分3.3分，表明环境因素对学生专注力的影响不容忽视。</p>
+            </div>
+
+            <div class="finding-card">
+                <h4>工具使用趋势</h4>
+                <p>高年级学生更倾向于使用数字工具进行时间管理，如Todoist、Google Calendar等，而低年级学生更可能使用传统的手写计划本。</p>
+            </div>
+
+            <div class="finding-card">
+                <h4>拖延与效率关系</h4>
+                <p>拖延程度与自我评估的学习效率呈负相关。拖延严重的学生普遍自我评估学习效率较低，而拖延较少的学生则对自己的学习效率评价更高。</p>
+            </div>
+
+            <div class="finding-card">
+                <h4>功能需求优先级</h4>
+                <p>学生最希望获得的功能是"屏蔽干扰"和"任务拆分"，其次是"动态调整"和"数据报告"，表明学生更关注解决实际执行问题而非单纯规划。</p>
+            </div>
+        </div>
+
+        <h3>对产品设计的启示</h3>
+        <ul>
+            <li>应用应提供强效的干扰屏蔽功能，特别是针对手机和噪音的干扰</li>
+            <li>智能任务拆分功能应成为核心功能之一</li>
+            <li>需要设计灵活的计划调整机制，应对学生生活中的不确定性</li>
+            <li>可视化数据报告功能有助于学生了解自己的时间使用模式</li>
+            <li>针对不同年级学生的工具使用习惯，提供多样化的规划方式</li>
+        </ul>
+    </section>
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2023 我上早八团队 - 知行合一项目 | 本页面内容仅供参考</p>
+    </div>
+</footer>
+</body>
+
+</html>

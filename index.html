@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生时间管理应用项目</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #4a6491, #2c3e50);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eaecef;
+            display: flex;
+            align-items: center;
+        }
+
+        h2:before {
+            content: "■";
+            margin-right: 10px;
+            color: #3498db;
+        }
+
+        h3 {
+            color: #3498db;
+            margin: 20px 0 10px;
+            font-size: 1.4rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul,
+        ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .member {
+            flex: 1 1 200px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #3498db;
+        }
+
+        .member h4 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .member .role {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .project-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .detail-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-top: 4px solid #3498db;
+        }
+
+        .detail-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .data-plan {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .plan-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+
+        .plan-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .timeline {
+            margin-top: 20px;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .timeline-date {
+            min-width: 120px;
+            background: #3498db;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border-radius: 0 5px 5px 0;
+        }
+
+        /* 问卷结果部分 */
+        .survey-insights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .insight-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-top: 4px solid #3498db;
+        }
+
+        .insight-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eaecef;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f5f7fa;
+        }
+
+        .data-table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .interview-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .interview-link:hover {
+            background: #2980b9;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            border-top: 1px solid #eaecef;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 20px;
+            }
+
+            .team-members,
+            .project-details,
+            .data-plan,
+            .survey-insights {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+            }
+
+            .timeline-date {
+                border-radius: 5px 5px 0 0;
+                margin-bottom: 5px;
+            }
+
+            .timeline-content {
+                border-radius: 0 0 5px 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <div class="container">
+        <h1>学生时间管理应用项目提案</h1>
+        <p class="subtitle">旨在帮助学生提升学习效率与生活满意度</p>
+    </div>
+</header>
+
+<div class="container">
+    <section id="team-intro">
+        <h2>团队介绍</h2>
+        <p>我们是"我上早八"团队，专注于解决学生群体面临的时间管理挑战。我们结合行为心理学、教育技术和用户体验设计，致力于开发能够真正帮助学生提升学习效率和生活质量的应用。</p>
+
+        <div class="team-members">
+            <div class="member">
+                <h4>王浩羽</h4>
+            </div>
+            <div class="member">
+                <h4>张谱原</h4>
+            </div>
+            <div class="member">
+                <h4>王诚来</h4>
+            </div>
+            <div class="member">
+                <h4>郭明硕</h4>
+            </div>
+        </div>
+
+        <h3>团队优势</h3>
+        <ul>
+            <li>成员普遍具备较强的自主学习能力，能够迅速掌握新工具、新框架与科研方法，灵活应对项目中出现的技术难题。</li>
+            <li>团队内部沟通机制完善，定期举行讨论会议，问题反馈及时，能够在尊重与信任的基础上高效推进项目。</li>
+        </ul>
+    </section>
+
+    <section id="project-proposal">
+        <h2>项目提案</h2>
+        <p>学生时间管理应用旨在解决学生群体中普遍存在的"知易行难"困境。传统时间管理工具无法有效应对学生的拖延、多变日程和数字干扰问题，导致学习效率低下和压力增大。本应用基于行为心理学原理，通过智能任务拆解、自适应日程规划和积极的游戏化反馈机制，帮助学生建立自信、减少焦虑，成为一款人性化的"时间教练"。
+        </p>
+
+        <div class="project-details">
+            <div class="detail-card">
+                <h4>项目目标</h4>
+                <ul>
+                    <li>开发直观易用的学生时间管理平台</li>
+                    <li>基于行为心理学原理设计核心功能</li>
+                    <li>帮助学生克服拖延，提高任务完成率</li>
+                    <li>降低学生的时间管理焦虑</li>
+                    <li>提升学生对学业和生活的掌控感</li>
+                </ul>
+            </div>
+
+            <div class="detail-card">
+                <h4>核心功能</h4>
+                <ul>
+                    <li>智能任务拆解 - 将大任务分解为易执行的微步骤</li>
+                    <li>自适应日程规划 - 灵活应对突发变化</li>
+                    <li>游戏化反馈机制 - 积极强化而非说教式提醒</li>
+                    <li>专注模式 - 减少数字干扰，提高学习效率</li>
+                    <li>进度可视化 - 清晰展示学习成果与进步</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="data-collection">
+        <h2>数据收集计划</h2>
+        <p>为确保"知行合一"应用能够真正解决学生的时间管理问题，我们将通过多种方式收集数据，包括用户访谈、问卷调查和应用使用数据分析。这些数据将帮助我们深入了解学生的时间管理习惯、痛点和期望，验证应用效果并持续改进产品。
+        </p>
+
+        <div class="data-plan">
+            <div class="plan-card">
+                <h4>用户访谈</h4>
+                <p>通过深度访谈了解学生的时间管理习惯、面临的挑战和期望的功能。</p>
+                <ul>
+                    <li>目标人群：大学生、研究生</li>
+                    <li>样本数量：4人</li>
+                    <li>访谈时长：10-15分钟/人</li>
+                    <li>主要内容：时间管理习惯、拖延情况、工具使用偏好、期望功能</li>
+                </ul>
+            </div>
+
+            <div class="plan-card">
+                <h4>问卷调查</h4>
+                <p>通过大规模问卷收集学生基本信息和时间管理相关数据。</p>
+                <ul>
+                    <li>目标人群：各年级大学生</li>
+                    <li>样本数量：10+有效问卷</li>
+                    <li>问卷形式：在线问卷/线下问卷</li>
+                    <li>主要内容：学业压力、时间分配、拖延程度、受到干扰情况</li>
+                </ul>
+            </div>
+
+            <div class="plan-card">
+                <h4>应用使用数据</h4>
+                <p>期望通过应用后台收集用户行为数据，分析使用模式和效果。</p>
+                <ul>
+                    <li>数据类型：功能使用频率、任务完成率、专注时长</li>
+                    <li>分析重点：用户参与度、功能有效性、改进方向</li>
+                    <li>隐私保护：完全匿名化处理，符合数据安全法规</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>数据收集时间表</h3>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">第1-2周</div>
+                <div class="timeline-content">
+                    <h4>准备阶段</h4>
+                    <p>设计访谈提纲和问卷内容，确定目标人群和抽样方法。</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">第3-5周</div>
+                <div class="timeline-content">
+                    <h4>数据收集</h4>
+                    <p>进行学生访谈，发放和回收问卷，开始应用原型测试。</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">第6-7周</div>
+                <div class="timeline-content">
+                    <h4>数据分析</h4>
+                    <p>整理和分析收集的数据，形成学生用户画像和需求报告。</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">第8周</div>
+                <div class="timeline-content">
+                    <h4>结果应用</h4>
+                    <p>基于分析结果优化应用设计，制定下一阶段开发计划。</p>
+                </div>
+            </div>
+        </div>
+
+        <h3>数据保护措施</h3>
+        <ul>
+            <li>所有个人数据将进行匿名化处理</li>
+            <li>严格遵守数据保护法规</li>
+            <li>数据仅用于研究和产品改进目的</li>
+        </ul>
+    </section>
+
+    <section id="survey-results">
+        <h2>实验4</h2>
+        <a href="survey.html" class="interview-link">查看调查问卷数据分析 →</a>
+        <a href="interview.html" class="interview-link">查看详细访谈数据分析 →</a>
+    </section>
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2023 我上早八团队 - 知行合一项目 | 本页面内容仅供参考</p>
+    </div>
+</footer>
+</body>
+
+</html>
