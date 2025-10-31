@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>亲和图展示 - 学生时间管理应用项目</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    }
+
+    body {
+      background-color: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      flex: 1;
+    }
+
+    header {
+      background: linear-gradient(135deg, #4a6491, #2c3e50);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      border-radius: 0 0 10px 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: #3498db;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 16px;
+      border: 1px solid #3498db;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    .header-subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    section {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      color: #2c3e50;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #eaecef;
+      display: flex;
+      align-items: center;
+    }
+
+    h2:before {
+      content: "■";
+      margin-right: 10px;
+      color: #3498db;
+    }
+
+    .affinity-chart-container {
+      text-align: center;
+      padding: 20px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .affinity-chart {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .affinity-chart:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .placeholder-text {
+      text-align: center;
+      color: #7f8c8d;
+      margin-top: 20px;
+      font-style: italic;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+      color: #7f8c8d;
+      font-size: 0.9rem;
+      border-top: 1px solid #eaecef;
+      background: white;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .header-subtitle {
+        font-size: 1rem;
+      }
+
+      section {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="container">
+    <h1>图片展示</h1>
+    <p class="header-subtitle">学生时间管理应用项目</p>
+    <a href="index.html" class="back-link">← 返回项目主页</a>
+  </div>
+</header>
+
+<div class="container">
+  <section>
+    <h2>各年级拖延时长分布（柱状图）</h2>
+    <div class="affinity-chart-container">
+      <img src="./images/5-1.png" alt="各年级拖延时长分布（柱状图）" width="900" height="800">
+    </div>
+  </section>
+  <section>
+    <h2>学习干扰源雷达图</h2>
+    <div class="affinity-chart-container">
+      <img src="./images/5-2.png" alt="学习干扰源雷达图" width="900" height="800">
+    </div>
+  </section>
+  <section>
+    <h2>  时间管理方法热力图</h2>
+    <div class="affinity-chart-container">
+      <img src="./images/5-3.png" alt="学习干扰源雷达图" width="900" height="800">
+    </div>
+  </section>
+  <section>
+    <h2>拖延与成绩相关性分析</h2>
+    <div class="affinity-chart-container">
+      <img src="./images/5-4.png" alt="学习干扰源雷达图" width="900" height="800">
+    </div>
+  </section>
+  <section id="affinity-chart">
+    <h2>亲和图</h2>
+    <div class="affinity-chart-container">
+      <img src="./images/5-5.png" alt="亲和图" width="900" height="800">
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="container">
+    <p>© 2023 我上早八团队 - 知行合一项目 | 本页面内容仅供参考</p>
+  </div>
+</footer>
+</body>
+</html>
